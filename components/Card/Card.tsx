@@ -1,0 +1,104 @@
+import css from '@/components/Card/Card.module.css';
+import Image from 'next/image';
+import type { Teacher } from '@/types/teacher';
+
+type CardProps = {
+  teacher: Teacher;
+};
+
+export default function Card({ teacher }: CardProps) {
+  return (
+    <section className={css.container}>
+      <div className={css.box}>
+        <div className={css.circle}>
+          <div className={css.photo}>
+            <img
+              src={teacher.avatar_url}
+              width="96"
+              height="96"
+              alt="photo"
+              className={css.avatarImg}
+            ></img>
+            <svg className={css.green} width="12" height="12">
+              <use href="/icon.svg#icon-Group"></use>
+            </svg>
+          </div>
+        </div>
+        <div className={css.right}>
+          <div className={css.information}>
+            <div className={css.wrapper}>
+              <p className={css.specialty}>Languages</p>
+              <h1 className={css.title}>
+                {teacher.name} {teacher.surname}
+              </h1>
+            </div>
+            <div className={css.wrap}>
+              <ul className={css.list}>
+                <li className={css.item}>
+                  <svg className={css.icon} width="16" height="16">
+                    <use href="/icon.svg#icon-book"></use>
+                  </svg>
+                  Lessons online
+                </li>
+                <svg className="line" width="1" height="16">
+                  <use href="/Vector.svg"></use>
+                </svg>
+                <li className={css.item}>
+                  Lessons done: {teacher.lessons_done}
+                </li>
+                <svg className="line" width="1" height="16">
+                  <use href="/Vector.svg"></use>
+                </svg>
+                <li className={css.item}>
+                  <svg className={css.icon} width="16" height="16">
+                    <use href="/star.svg"></use>
+                  </svg>
+                  Rating: {teacher.rating}
+                </li>
+                <svg className="line" width="1" height="16">
+                  <use href="/Vector.svg"></use>
+                </svg>
+                <li className={css.item}>
+                  Price / 1 hour:
+                  <span className={css.price}> {teacher.price_per_hour}$</span>
+                </li>
+              </ul>
+              <svg className={css.icon} width="26" height="26">
+                <use href="/icon.svg#icon-heart"></use>
+              </svg>
+            </div>
+          </div>
+          <ul className={css.about}>
+            <li className={css.item}>
+              <span className={css.span}> Speaks:</span>
+              <span className={css.lanquages}>
+                {teacher.languages.join(',')}
+              </span>
+            </li>
+            <li className={css.item}>
+              <span className={css.span}> Lesson Info:</span>{' '}
+              {teacher.lesson_info}
+            </li>
+            <li className={css.item}>
+              <span className={css.span}> Conditions:</span>{' '}
+              {teacher.conditions.join(',')}
+            </li>
+          </ul>
+          <button type="button" className={css.read}>
+            Read more
+          </button>
+
+          <ul className={css.buttonList}>
+            {teacher.levels.map((level, index) => (
+              <li key={index}>
+                <button type="button" className={css.level}>
+                  {level}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,130 @@
+.hero {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.box {
+  border-radius: 30px;
+  width: 720px;
+  height: 530px;
+  background: #f8f8f8;
+  padding: 98px 64px 0 64px;
+}
+.title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  color: #121417;
+  margin-bottom: 32px;
+  width: 548px;
+}
+.span {
+  font-style: italic;
+  font-weight: 400;
+  background-color: #fbe9ba;
+}
+.text {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 138%;
+  letter-spacing: -0.02em;
+  color: #121417;
+  margin-bottom: 64px;
+  width: 471px;
+}
+.button {
+  border-radius: 12px;
+  padding: 16px 88px;
+  width: 267px;
+  height: 60px;
+  background: #f4c550;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #121417;
+}
+.picture {
+  border-radius: 30px;
+  width: 568px;
+  height: 530px;
+  background: #fbe9ba;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+.face {
+  object-fit: cover;
+  margin-top: 80px;
+}
+.faceWrapper {
+  background-color: #fbe9ba;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* overflow: hidden; */
+  width: 339px;
+  height: 339px;
+  position: relative;
+}
+.faceWrapper span {
+  background-color: #fbe9ba;
+}
+.faceWrapper span img {
+  object-fit: cover;
+}
+
+.macbook {
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+}
+.info {
+  border: 1.5px dashed #f4c550;
+  border-radius: 30px;
+  width: 1312px;
+  height: 116px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.boxInfo {
+  width: 1067px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.ul {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: -0.02em;
+  color: #121417;
+}
+.descr {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}

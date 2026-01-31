@@ -1,0 +1,81 @@
+.icon {
+  stroke: #121417;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #121417;
+  margin-bottom: 20px;
+}
+.descr {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 137%;
+  color: rgba(18, 20, 23, 0.8);
+  margin-bottom: 22px;
+  width: 438px;
+}
+.form {
+  width: 438px;
+  height: 198px;
+}
+.input {
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 438px;
+  height: 54px;
+  margin-top: 18px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 137%;
+  color: #121417;
+}
+.btn {
+  border-radius: 12px;
+  padding: 16px 210px;
+  width: 438px;
+  height: 60px;
+  background: #f4c550;
+  margin-top: 22px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #121417;
+  white-space: nowrap;
+}
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 137%;
+  color: #f11b1b;
+}
+
+.passworField {
+  position: relative;
+}
+
+.passworField .input {
+  padding-right: 46px; /* місце під око */
+}
+.eye {
+  position: absolute;
+  right: 18px;
+  top: 34px;
+  /* transform: translateY(-50%); */
+  cursor: pointer;
+  stroke: #121417;
+  fill: none;
+}

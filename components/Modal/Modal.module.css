@@ -1,0 +1,20 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 64px;
+  width: 566px;
+  max-width: calc(100vw - 32px);
+  position: relative;
+  height: 600px;
+}
