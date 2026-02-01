@@ -2,7 +2,7 @@
   border-radius: 24px;
   padding: 24px;
   width: 1184px;
-  height: 328px;
+  /* height: 328px; */
   background: #fff;
   margin-top: 32px;
 }
@@ -133,6 +133,7 @@
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: #121417;
+  /* margin-bottom: 32px; */
 }
 .buttonList {
   display: flex;
@@ -152,4 +153,54 @@
   font-size: 14px;
   line-height: 114%;
   color: #121417;
+}
+.reviewHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.reviewItem {
+  margin-top: 32px;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #8a8a89;
+}
+.reviewPhoto {
+  height: 44px;
+}
+.rating {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #121417;
+}
+.comment {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #121417;
+  /* margin-bottom: 32px; */
+}
+.book {
+  border-radius: 12px;
+  padding: 16px 48px;
+  width: 232px;
+  height: 60px;
+  background: #f4c550;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #121417;
+  margin-top: 32px;
 }

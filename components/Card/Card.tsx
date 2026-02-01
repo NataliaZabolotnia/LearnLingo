@@ -1,12 +1,21 @@
+'use client';
+
 import css from '@/components/Card/Card.module.css';
-import Image from 'next/image';
+// import Image from 'next/image';
 import type { Teacher } from '@/types/teacher';
+import { useState } from 'react';
+import BookModal from '../BookModal/BookModal';
+// import type Teacher from '@/types/teacher';
 
 type CardProps = {
   teacher: Teacher;
 };
 
 export default function Card({ teacher }: CardProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isBookOpen, setIsBookOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
+
   return (
     <section className={css.container}>
       <div className={css.box}>
@@ -84,9 +93,37 @@ export default function Card({ teacher }: CardProps) {
               {teacher.conditions.join(',')}
             </li>
           </ul>
-          <button type="button" className={css.read}>
-            Read more
+          <button type="button" className={css.read} onClick={toggle}>
+            {isOpen ? 'Read less' : 'Read more'}
           </button>
+
+          {isOpen && (
+            <div className={css.reviews}>
+              <ul className={css.reviewsList}>
+                {teacher.reviews.map((review, index) => (
+                  <li key={index} className={css.reviewItem}>
+                    <div className={css.reviewHeader}>
+                      <img
+                        src="/image.png"
+                        alt={review.reviewer_name}
+                        width="44"
+                        height="44"
+                        className={css.reviewPhoto}
+                      />
+                      <div className={css.name}>
+                        <p className={css.reviewer}>{review.reviewer_name}</p>
+                        <p className={css.rating}>
+                          ⭐ {review.reviewer_rating.toFixed(1)}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className={css.comment}>{review.comment}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <ul className={css.buttonList}>
             {teacher.levels.map((level, index) => (
@@ -97,6 +134,25 @@ export default function Card({ teacher }: CardProps) {
               </li>
             ))}
           </ul>
+          {isOpen && (
+            <button
+              type="button"
+              className={css.book}
+              onClick={() => {
+                setIsBookOpen(true);
+              }}
+            >
+              Book trial lesson
+            </button>
+          )}
+          {isBookOpen && (
+            <BookModal
+              teacher={teacher}
+              onClose={() => {
+                setIsBookOpen(false);
+              }}
+            />
+          )}
         </div>
       </div>
     </section>

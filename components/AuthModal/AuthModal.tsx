@@ -52,7 +52,7 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
       if (error.response?.data?.message) {
         setServerError(error.response.data.message);
       } else {
-        setServerError(error.message || 'Сталася помилка');
+        setServerError(error.message || 'Error!');
       }
     }
   };
@@ -106,7 +106,7 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
         {errors.password && (
           <p className={css.error}>{errors.password.message}</p>
         )}
-        {serverError && <p className={css.error}>User is not registered</p>}
+        {serverError && <p className={css.error}>{serverError}</p>}
         <button className={css.btn} type="submit">
           {mode === 'register' ? 'Register' : 'Login'}
         </button>
