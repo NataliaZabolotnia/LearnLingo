@@ -3,8 +3,8 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD21C_GWtb2PdJSMkhcFf_MOE7fui7Wz-4',
   authDomain: 'teachers-app-5031f.firebaseapp.com',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   projectId: 'teachers-app-5031f',
   storageBucket: 'teachers-app-5031f.firebasestorage.app',
   messagingSenderId: '326858861344',
