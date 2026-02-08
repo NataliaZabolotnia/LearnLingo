@@ -1,6 +1,5 @@
 .icon {
   stroke: #121417;
-
   position: absolute;
   top: 20px;
   right: 20px;
@@ -26,7 +25,7 @@
 }
 .form {
   width: 438px;
-  height: 198px;
+  /* height: 198px; */
 }
 .input {
   border: 1px solid rgba(18, 20, 23, 0.1);
@@ -61,20 +60,30 @@
   font-size: 16px;
   line-height: 137%;
   color: #f11b1b;
+  min-height: 22px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 98px;
 }
 
 .passworField {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 80px;
 }
 
 .passworField .input {
-  padding-right: 46px; /* місце під око */
+  padding-right: 46px;
 }
 .eye {
   position: absolute;
   right: 18px;
   top: 34px;
-  /* transform: translateY(-50%); */
   cursor: pointer;
   stroke: #121417;
   fill: none;

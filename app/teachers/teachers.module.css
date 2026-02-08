@@ -20,3 +20,33 @@
   margin-top: 64px;
   margin-bottom: 96px;
 }
+.filters {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #8a8a89;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 1184px;
+  align-items: start;
+  margin-top: 96px;
+}
+.select {
+  border-radius: 14px;
+  padding: 14px 16px;
+  width: 221px;
+  height: 48px;
+  background: #fff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+  color: #121417;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

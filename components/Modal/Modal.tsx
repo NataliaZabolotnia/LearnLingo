@@ -12,11 +12,12 @@ export default function Modal({ children, onClose }: modalProps) {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-
+    const originalOverflow = document.body.style.overflow;
     document.addEventListener('keydown', handleEsc);
     document.body.style.overflow = 'hidden';
 
     return () => {
+      document.body.style.overflow = originalOverflow;
       document.removeEventListener('keydown', handleEsc);
       document.body.style.overflow = '';
     };

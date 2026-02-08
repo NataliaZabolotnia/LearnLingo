@@ -1,4 +1,4 @@
-.icon {
+/* .icon {
   stroke: #121417;
 
   position: absolute;
@@ -68,14 +68,14 @@
 }
 
 .passworField .input {
-  padding-right: 46px; /* місце під око */
+  padding-right: 46px; 
 }
 .eye {
   position: absolute;
   right: 18px;
   top: 34px;
-  /* transform: translateY(-50%); */
+ 
   cursor: pointer;
   stroke: #121417;
   fill: none;
-}
+} */

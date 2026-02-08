@@ -1,3 +1,5 @@
+export type TeacherFromDB = Omit<Teacher, 'id'>;
+
 export type Review = {
   reviewer_name: string;
   reviewer_rating: number;
@@ -5,6 +7,7 @@ export type Review = {
 };
 
 export type Teacher = {
+  id: string;
   name: string;
   surname: string;
   languages: string[];

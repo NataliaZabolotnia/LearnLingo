@@ -13,8 +13,11 @@
   background: #fff;
   border-radius: 20px;
   padding: 64px;
-  width: 566px;
+  width: 599px;
   max-width: calc(100vw - 32px);
   position: relative;
-  /* height: 600px; */
+  /* height: 100%; */
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

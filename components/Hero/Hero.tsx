@@ -1,5 +1,6 @@
 import css from '@/components/Hero/Hero.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function Hero() {
   return (
     <div className={css.wrapper}>
@@ -14,9 +15,9 @@ export default function Hero() {
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </p>
-          <button type="button" className={css.button}>
+          <Link href="/teachers" className={css.button}>
             Get started
-          </button>
+          </Link>
         </div>
         <div className={css.picture}>
           <div className={css.faceWrapper}>

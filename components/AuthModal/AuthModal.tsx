@@ -13,17 +13,59 @@ type AuthModalProps = {
   onClose: () => void;
 };
 
-const schema = Yup.object({
-  name: Yup.string().when('$mode', {
-    is: 'register',
-    then: (s) => s.required('Required'),
-    otherwise: (s) => s.notRequired(),
-  }),
+// type FormValues = Yup.InferType<typeof schema>;
+// type FormValues = {
+//   name: string | undefined;
+//   email: string;
+//   password: string;
+// };
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
+
+type RegisterFormValues = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+// const schema = Yup.object({
+//   name: Yup.string().when('$mode', {
+//     is: 'register',
+//     then: (s) => s.required('Required'),
+//     otherwise: (s) => s.notRequired(),
+//   }),
+//   email: Yup.string().email('Invalid email').required('Required'),
+//   password: Yup.string().min(6, 'At least 6 characters').required('Required'),
+// });
+
+// const getSchema = (mode: 'login' | 'register') =>
+//   Yup.object({
+//     name:
+//       mode === 'register'
+//         ? Yup.string().nullable(false).required('Required')
+//         : Yup.string().nullable(false).notRequired(),
+//     email: Yup.string()
+//       .nullable(false)
+//       .email('Invalid email')
+//       .required('Required'),
+//     password: Yup.string()
+//       .nullable(false)
+//       .min(6, 'At least 6 characters')
+//       .required('Required'),
+//   });
+
+export const loginSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(6, 'At least 6 characters').required('Required'),
 });
 
-type FormValues = Yup.InferType<typeof schema>;
+export const registerSchema = Yup.object({
+  name: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().min(6, 'At least 6 characters').required('Required'),
+});
 
 export default function AuthModal({ mode, onClose }: AuthModalProps) {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -32,15 +74,16 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema, { context: { mode } }),
+  } = useForm<any>({
+    resolver: yupResolver(mode === 'register' ? registerSchema : loginSchema),
+    shouldUnregister: true,
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: any) => {
     try {
       setServerError(null);
       if (mode === 'register') {
-        await registerUser(data.name!, data.email, data.password);
+        await registerUser(data.name, data.email, data.password);
         console.log('Користувач зареєстрований!');
       } else {
         await loginUser(data.email, data.password);
@@ -73,23 +116,33 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
       </p>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         {mode === 'register' && (
-          <>
+          <div className={css.field}>
             <input
               className={css.input}
               type="text"
-              placeholder="name"
+              placeholder="Name"
               {...register('name')}
             />
-            {errors.name && <p className={css.error}>{errors.name.message}</p>}
-          </>
+            {errors.name && (
+              <p className={css.error}>
+                {String(errors.name.message) || '\u00A0'}
+              </p>
+            )}
+          </div>
         )}
-        <input
-          className={css.input}
-          type="email"
-          placeholder="Email"
-          {...register('email')}
-        />
-        {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        <div className={css.field}>
+          <input
+            className={css.input}
+            type="email"
+            placeholder="Email"
+            {...register('email')}
+          />
+          {errors.email && (
+            <p className={css.error}>
+              {String(errors.email.message) || '\u00A0'}
+            </p>
+          )}
+        </div>
         <div className={css.passworField}>
           <input
             className={css.input}
@@ -104,8 +157,11 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
           </button>
         </div>
         {errors.password && (
-          <p className={css.error}>{errors.password.message}</p>
+          <p className={css.error}>
+            {String(errors.password.message) || '\u00A0'}
+          </p>
         )}
+
         {serverError && <p className={css.error}>{serverError}</p>}
         <button className={css.btn} type="submit">
           {mode === 'register' ? 'Register' : 'Login'}

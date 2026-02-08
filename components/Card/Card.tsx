@@ -1,11 +1,10 @@
 'use client';
 
 import css from '@/components/Card/Card.module.css';
-// import Image from 'next/image';
 import type { Teacher } from '@/types/teacher';
 import { useState } from 'react';
 import BookModal from '../BookModal/BookModal';
-// import type Teacher from '@/types/teacher';
+import { useFavoritesStore } from '@/stores/FavoritesStore';
 
 type CardProps = {
   teacher: Teacher;
@@ -15,6 +14,23 @@ export default function Card({ teacher }: CardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isBookOpen, setIsBookOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+
+  // favorite
+  const addFavorite = useFavoritesStore((state) => state.addFavorite);
+  const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
+  const isFavorite = useFavoritesStore((state) => state.isFavorite);
+  const [favorite, setFavorite] = useState(isFavorite(teacher.id));
+  // const favorite = isFavorite(teacher.id);
+
+  const toggleFavorite = () => {
+    if (favorite) {
+      removeFavorite(teacher.id);
+      setFavorite(false);
+    } else {
+      addFavorite(teacher);
+      setFavorite(true);
+    }
+  };
 
   return (
     <section className={css.container}>
@@ -72,9 +88,16 @@ export default function Card({ teacher }: CardProps) {
                   <span className={css.price}> {teacher.price_per_hour}$</span>
                 </li>
               </ul>
-              <svg className={css.icon} width="26" height="26">
-                <use href="/icon.svg#icon-heart"></use>
-              </svg>
+              {/* favorite */}
+              <button onClick={toggleFavorite}>
+                <svg
+                  className={favorite ? css.heartActive : css.heart}
+                  width="26"
+                  height="26"
+                >
+                  <use href="/icon.svg#icon-heart"></use>
+                </svg>
+              </button>
             </div>
           </div>
           <ul className={css.about}>
