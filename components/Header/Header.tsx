@@ -35,6 +35,13 @@ export default function Header() {
             >
               Teachers
             </Link>
+            <Link
+              className={css.navlink}
+              href="/favorites"
+              aria-label="favorites"
+            >
+              Favorites
+            </Link>
           </div>
           <div className={css.enter}>
             <div className={css.login}>

@@ -6,6 +6,8 @@ import {
   User,
 } from 'firebase/auth';
 import { auth } from './firebase';
+import { ref, set } from 'firebase/database';
+import { database } from './firebase';
 
 export const registerUser = async (
   name: string,
@@ -17,6 +19,11 @@ export const registerUser = async (
     email,
     password
   );
+  await set(ref(database, `users/${userCredential.user.uid}`), {
+    name,
+    email,
+    createdAt: Date.now(),
+  });
   return userCredential.user;
 };
 

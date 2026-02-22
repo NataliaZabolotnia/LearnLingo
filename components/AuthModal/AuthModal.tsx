@@ -155,14 +155,15 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
               <use href="/icon.svg#icon-eye"></use>
             </svg>
           </button>
-        </div>
-        {errors.password && (
-          <p className={css.error}>
-            {String(errors.password.message) || '\u00A0'}
-          </p>
-        )}
 
-        {serverError && <p className={css.error}>{serverError}</p>}
+          {errors.password && (
+            <p className={css.error}>
+              {String(errors.password.message) || '\u00A0'}
+            </p>
+          )}
+        </div>
+
+        {/* {serverError && <p className={css.error}>{serverError}</p>} */}
         <button className={css.btn} type="submit">
           {mode === 'register' ? 'Register' : 'Login'}
         </button>

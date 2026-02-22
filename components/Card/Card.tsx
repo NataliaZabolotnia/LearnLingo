@@ -2,9 +2,12 @@
 
 import css from '@/components/Card/Card.module.css';
 import type { Teacher } from '@/types/teacher';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BookModal from '../BookModal/BookModal';
 import { useFavoritesStore } from '@/stores/FavoritesStore';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '@/firebase';
+import toast from 'react-hot-toast';
 
 type CardProps = {
   teacher: Teacher;
@@ -14,21 +17,36 @@ export default function Card({ teacher }: CardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isBookOpen, setIsBookOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+  // const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const isAuth = !!user;
 
   // favorite
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
   const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
   const isFavorite = useFavoritesStore((state) => state.isFavorite);
-  const [favorite, setFavorite] = useState(isFavorite(teacher.id));
-  // const favorite = isFavorite(teacher.id);
+  // const [favorite, setFavorite] = useState(isFavorite(teacher.id));
+
+  const favorite = useFavoritesStore((state) => state.isFavorite(teacher.id));
 
   const toggleFavorite = () => {
+    if (!isAuth) {
+      toast.error('This feature is available only for authorized users');
+      return;
+    }
     if (favorite) {
       removeFavorite(teacher.id);
-      setFavorite(false);
     } else {
       addFavorite(teacher);
-      setFavorite(true);
     }
   };
 

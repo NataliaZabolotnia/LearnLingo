@@ -137,7 +137,10 @@ export default function TeachersPage() {
         {visibleTeachers.map((teacher) => (
           <Card key={teacher.id} teacher={teacher} />
         ))}
-        {visibleCount < teachers.length && (
+        {filteredTeachers.length === 0 && (
+          <p className={css.message}>Nothing found</p>
+        )}
+        {visibleCount < filteredTeachers.length && (
           <button type="button" className={css.loadMore} onClick={loadMore}>
             Load more
           </button>

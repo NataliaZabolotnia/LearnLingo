@@ -56,6 +56,7 @@
   flex-direction: row;
   gap: 149px;
   margin-bottom: 32px;
+  justify-content: space-between;
 }
 .wrapper {
   display: flex;
@@ -80,6 +81,7 @@
   display: flex;
   flex-direction: row;
   gap: 64px;
+  align-items: flex-start;
 }
 .icon {
   stroke: #121417;
