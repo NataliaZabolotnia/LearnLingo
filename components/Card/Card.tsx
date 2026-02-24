@@ -17,32 +17,20 @@ export default function Card({ teacher }: CardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isBookOpen, setIsBookOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
-  // const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [favoritesStore, setFavoritesStore] = useState<any>(null);
+  const [favorites, setFavorites] = useState<Teacher[]>([]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+  const { addFavorite, removeFavorite, isFavorite } = useFavoritesStore();
 
-    return () => unsubscribe();
-  }, []);
-
-  const isAuth = !!user;
-
-  // favorite
-  const addFavorite = useFavoritesStore((state) => state.addFavorite);
-  const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
-  const isFavorite = useFavoritesStore((state) => state.isFavorite);
-  // const [favorite, setFavorite] = useState(isFavorite(teacher.id));
-
-  const favorite = useFavoritesStore((state) => state.isFavorite(teacher.id));
+  const favorite = isFavorite(teacher.id);
 
   const toggleFavorite = () => {
-    if (!isAuth) {
-      toast.error('This feature is available only for authorized users');
+    if (!auth.currentUser) {
+      toast.error('Only for authorized users');
       return;
     }
+
     if (favorite) {
       removeFavorite(teacher.id);
     } else {

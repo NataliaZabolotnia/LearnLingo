@@ -6,10 +6,13 @@ import { useState } from 'react';
 // import Registration from '@/components/Registration/Registration';
 import AuthModal from '@/components/AuthModal/AuthModal';
 import { logoutUser } from '@/auth';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<'login' | 'register'>('register');
+  const router = useRouter();
 
   return (
     <>
@@ -50,6 +53,9 @@ export default function Header() {
                 onClick={() => {
                   logoutUser();
                   console.log('Користувач вийшов');
+                  toast.success('Logged out successfully 👋');
+                  router.push('/');
+                  // router.refresh();
                 }}
               >
                 <svg className={css.svg} width="20" height="20">

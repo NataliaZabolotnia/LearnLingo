@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-// import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
 import { Roboto } from 'next/font/google';
 import Header from '@/components/Header/Header';
 import css from '@/app/page.module.css';
-import { AuthProvider } from '@/auth-context';
-import { Toaster } from 'react-hot-toast';
+// import { AuthProvider } from '@/auth-context';
+// import { Toaster } from 'react-hot-toast';
+import Providers from '@/components/Providers';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -13,16 +13,6 @@ const roboto = Roboto({
   variable: '--font-roboto',
   display: 'swap',
 });
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -37,11 +27,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <AuthProvider>
+        {/* <AuthProvider> */}
+        <Providers>
           <Header />
           {children}
-        </AuthProvider>
-        <Toaster position="top-right" />
+        </Providers>
+        {/* </AuthProvider> */}
       </body>
     </html>
   );

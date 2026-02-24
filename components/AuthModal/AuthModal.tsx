@@ -7,18 +7,13 @@ import { registerUser, loginUser } from '@/auth';
 import Modal from '../Modal/Modal';
 import css from '@/components/AuthModal/AuthModal.module.css';
 import { useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 
 type AuthModalProps = {
   mode: 'login' | 'register';
   onClose: () => void;
 };
 
-// type FormValues = Yup.InferType<typeof schema>;
-// type FormValues = {
-//   name: string | undefined;
-//   email: string;
-//   password: string;
-// };
 type LoginFormValues = {
   email: string;
   password: string;
@@ -29,32 +24,6 @@ type RegisterFormValues = {
   email: string;
   password: string;
 };
-
-// const schema = Yup.object({
-//   name: Yup.string().when('$mode', {
-//     is: 'register',
-//     then: (s) => s.required('Required'),
-//     otherwise: (s) => s.notRequired(),
-//   }),
-//   email: Yup.string().email('Invalid email').required('Required'),
-//   password: Yup.string().min(6, 'At least 6 characters').required('Required'),
-// });
-
-// const getSchema = (mode: 'login' | 'register') =>
-//   Yup.object({
-//     name:
-//       mode === 'register'
-//         ? Yup.string().nullable(false).required('Required')
-//         : Yup.string().nullable(false).notRequired(),
-//     email: Yup.string()
-//       .nullable(false)
-//       .email('Invalid email')
-//       .required('Required'),
-//     password: Yup.string()
-//       .nullable(false)
-//       .min(6, 'At least 6 characters')
-//       .required('Required'),
-//   });
 
 export const loginSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -85,13 +54,16 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
       if (mode === 'register') {
         await registerUser(data.name, data.email, data.password);
         console.log('Користувач зареєстрований!');
+        toast.success(`${data.email},registration successful 🎉`);
       } else {
         await loginUser(data.email, data.password);
         console.log('Користувач увійшов!');
+        toast.success(`${data.email},welcome back 👋 `);
       }
       onClose();
     } catch (error: any) {
       console.error('Помилка:', error.message);
+      toast.error(error.message || 'Something went wrong');
       if (error.response?.data?.message) {
         setServerError(error.response.data.message);
       } else {
@@ -114,13 +86,18 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
           ? 'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information'
           : 'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
       </p>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={css.form}
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         {mode === 'register' && (
           <div className={css.field}>
             <input
               className={css.input}
               type="text"
               placeholder="Name"
+              autoComplete="username"
               {...register('name')}
             />
             {errors.name && (
@@ -148,6 +125,7 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
             className={css.input}
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
+            autoComplete="current-password"
             {...register('password')}
           />
           <button type="button" onClick={togglePassword}>
@@ -163,7 +141,6 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
           )}
         </div>
 
-        {/* {serverError && <p className={css.error}>{serverError}</p>} */}
         <button className={css.btn} type="submit">
           {mode === 'register' ? 'Register' : 'Login'}
         </button>
